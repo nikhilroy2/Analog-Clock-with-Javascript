@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            background: #222;
+        }
+
+
+        .clock_wrapper {
+            --clock-width: 400px;
+            width: var(--clock-width);
+            height: 400px;
+            position: relative;
+            border-radius: 50%;
+            background: #ddd;
+            box-shadow: 0 0 50px 0px inset #00ff00;
+            z-index: 3;
+
+        }
+      
+
+        .clock {
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            text-align: center;
+            transform-origin: center;
+            padding: 20px;
+
+        }
+
+        .clock:nth-child(1) {
+            transform: rotate(30deg);
+        }
+
+        .clock:nth-child(2) {
+            transform: rotate(60deg);
+        }
+
+        .clock:nth-child(3) {
+            transform: rotate(90deg);
+        }
+
+        .clock:nth-child(4) {
+            transform: rotate(120deg);
+        }
+
+        .clock:nth-child(5) {
+            transform: rotate(150deg);
+        }
+
+        .clock:nth-child(6) {
+            transform: rotate(180deg);
+        }
+
+        .clock:nth-child(7) {
+            transform: rotate(210deg);
+        }
+
+        .clock:nth-child(8) {
+            transform: rotate(240deg);
+        }
+
+        .clock:nth-child(9) {
+            transform: rotate(270deg);
+        }
+
+        .clock:nth-child(10) {
+            transform: rotate(300deg);
+        }
+
+        .clock:nth-child(11) {
+            transform: rotate(330deg);
+        }
+
+        .clock:nth-child(12) {
+            transform: rotate(360deg);
+        }
+
+        .line_wrapper {
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .line_wrapper::after {
+            content: '';
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: black;
+            border-radius: 50%;
+        }
+
+        .line_wrapper [class*='line'] {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 40%;
+            transform-origin: bottom;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .line_wrapper .h_line {
+            background: black;
+            height: 30%;
+        }
+
+        .line_wrapper .m_line {
+            background: blue;
+            height: 35%;
+
+        }
+
+        .line_wrapper .s_line {
+            background: red;
+            transform: rotate(30deg);
+            margin-top: 10px;
+        }
+        .line_wrapper .s_line::after{
+            content: '';
+            width: 5px;
+            height: 40px;
+            background: red;
+            bottom: -35px;
+            left: 0px;
+            position: absolute;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clock_wrapper">
+
+        <div class="clock"><h3>1</h3></div>
+        <div class="clock"><h3>2</h3></div>
+        <div class="clock"><h3>3</h3></div>
+        <div class="clock"><h3>4</h3></div>
+        <div class="clock"><h3>5</h3></div>
+        <div class="clock"><h3>6</h3></div>
+        <div class="clock"><h3>7</h3></div>
+        <div class="clock"><h3>8</h3></div>
+        <div class="clock"><h3>9</h3></div>
+        <div class="clock"><h3>10</h3></div>
+        <div class="clock"><h3>11</h3></div>
+        <div class="clock"><h3>12</h3></div>
+
+        <div class="line_wrapper">
+            <div class="h_line"></div>
+            <div class="m_line"></div>
+            <div class="s_line"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        let h_line = document.querySelector('.h_line');
+        let m_line = document.querySelector('.m_line');
+        let s_line = document.querySelector('.s_line');
+
+        let setTime = setInterval(updateTime, 1000);
+
+        function updateTime() {
+            let time = new Date();
+            let time_hours = new Date().getHours();
+            let time_minutes = new Date().getMinutes();
+            let time_seconds = new Date().getSeconds();
+            s_line.style.transform = `rotate(${ (360 / 100) * ((time_seconds/ 60) * 100) }deg)`;
+            m_line.style.transform = `rotate(${ (360 / 100) * ((time_minutes/ 60) * 100) }deg)`;
+            h_line.style.transform = `rotate(${ (360 / 100) * ((time_hours / 12) * 100) }deg)`;
+        }
+
+
+    </script>
+
+</body>
+
+</html>
